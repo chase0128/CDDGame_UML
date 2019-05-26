@@ -8,6 +8,7 @@ import android.util.Log;
 import com.oosad.cddgame.Data.Setting;
 import com.oosad.cddgame.Data.User;
 import com.oosad.cddgame.UI.GamingAct.model.Card;
+import com.oosad.cddgame.UI.GamingAct.model.system.CardMgr;
 import com.oosad.cddgame.UI.GamingAct.util.CardUtil;
 import com.oosad.cddgame.UI.GamingAct.view.CardLayout;
 import com.oosad.cddgame.UI.GamingAct.view.IGamingView;
@@ -58,7 +59,9 @@ public class GamingPresenterCompl implements IGamingPresenter {
     @Override
     public void Handle_DistributeCard() {
         Context context = m_GamingView.getThisPtr();
-        Card[] cards = CardUtil.DistributeCards();
+        CardMgr cardMgr=CardMgr.getInstance();
+        cardMgr.DistributeCards();
+        Card[] cards=cardMgr.Get_Player_Cards();
         for (Card c : cards) {
             m_GamingView.onAddCardLayout(CardUtil.getCardLayoutFromCard(context, c, false));
         }
